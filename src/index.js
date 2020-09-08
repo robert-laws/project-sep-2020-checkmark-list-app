@@ -8,6 +8,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
+import AuthState from './context/auth/AuthState';
+
 // Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: 'AIzaSyDtOyKLG2xe9nLYkUuqD4U-_TeoP1cPVSc',
@@ -24,7 +26,9 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthState>
+      <App />
+    </AuthState>
   </React.StrictMode>,
   document.getElementById('root')
 );

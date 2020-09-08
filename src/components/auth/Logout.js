@@ -11,7 +11,10 @@ const Logout = () => {
   };
 
   return (
-    <button className='mx-6 hover:text-red-400' onClick={logoutUser}>
+    <button
+      className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+      onClick={logoutUser}
+    >
       Logout
     </button>
   );

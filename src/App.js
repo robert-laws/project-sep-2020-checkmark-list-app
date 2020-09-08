@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main, Header, Footer } from './sections';
 import {
@@ -11,8 +11,12 @@ import {
   Signup,
   NotFound,
 } from './pages';
+import AuthContext from './context/auth/authContext';
 
 function App() {
+  const authContext = useContext(AuthContext);
+  const { isLoading, user } = authContext;
+
   return (
     <Router>
       <div className='w-screen h-screen flex flex-col font-body'>

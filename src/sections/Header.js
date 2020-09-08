@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../images/checkmark-outline.svg';
+import Logout from '../components/auth/Logout';
+import AuthContext from '../context/auth/authContext';
 
 export const Header = () => {
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
   return (
     <header className='w-full bg-green-800 flex-initial flex flex-col md:flex-row items-center p-3'>
       <div className='flex flex-col flex-1 md:flex-initial justify-center items-center w-20 h-auto my-3 ml-3'>
@@ -52,18 +57,24 @@ export const Header = () => {
         >
           About
         </NavLink>
-        <NavLink
-          to='/login'
-          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
-        >
-          Login
-        </NavLink>
-        <NavLink
-          to='/signup'
-          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
-        >
-          Signup
-        </NavLink>
+        {!user ? (
+          <>
+            <NavLink
+              to='/login'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to='/signup'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+            >
+              Signup
+            </NavLink>
+          </>
+        ) : (
+          <Logout />
+        )}
       </div>
     </header>
   );

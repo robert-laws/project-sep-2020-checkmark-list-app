@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../images/checkmark-outline.svg';
+import { ReactComponent as UserIcon } from '../images/user.svg';
 import Logout from '../components/auth/Logout';
 import AuthContext from '../context/auth/authContext';
 import UserContext from '../context/user/userContext';
@@ -90,7 +91,15 @@ export const Header = () => {
 
         {profile ? (
           <>
-            <span>Welcome, {profile.firstName}</span>
+            <div className='ml-8 mr-4 my-1 text-lg text-white font-bold'>
+              <span>Welcome, {profile.firstName}</span>
+              <UserIcon
+                className='h-6 w-6 inline-block ml-2'
+                style={{
+                  fill: '#FFF',
+                }}
+              />
+            </div>
           </>
         ) : null}
       </div>

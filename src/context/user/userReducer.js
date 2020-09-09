@@ -1,4 +1,4 @@
-import { GET_USER_BY_UID, REMOVE_USER } from '../types';
+import { GET_USER_BY_UID, REMOVE_USER, ADD_NEW_USER } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -12,6 +12,12 @@ export default (state, action) => {
       return {
         ...state,
         profile: null,
+      };
+
+    case ADD_NEW_USER:
+      return {
+        ...state,
+        profile: action.payload,
       };
 
     default:

@@ -39,13 +39,13 @@ export const Login = () => {
     } else {
       try {
         await signIn(email, password);
-        history.push('/lists');
+        history.push('/profile');
       } catch (error) {
         setErrors({
           ...errors,
           emailError: '',
           passwordError: '',
-          loginError: 'Error logging in',
+          loginError: error.message,
         });
       }
     }
@@ -59,7 +59,7 @@ export const Login = () => {
             <Heading>Login to the Checkmark List App</Heading>
           </div>
           <div className='mb-4'>
-            <p className='text-red-500 mt-2 text-xs italic'>
+            <p className='text-red-500 mt-2 text-sm italic'>
               {errors.loginError}
             </p>
           </div>
@@ -67,6 +67,7 @@ export const Login = () => {
             <Input
               error={errors.emailError}
               id='email'
+              name='email'
               type='email'
               placeholder='Email'
               value={email}
@@ -77,6 +78,7 @@ export const Login = () => {
             <Input
               error={errors.passwordError}
               id='password'
+              name='password'
               type='password'
               placeholder='Password'
               value={password}

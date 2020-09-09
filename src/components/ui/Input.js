@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Input = ({ id, type, placeholder, error, ...rest }) => {
+export const Input = ({ id, name, type, placeholder, error, ...rest }) => {
   return (
     <>
       <input
@@ -8,9 +8,10 @@ export const Input = ({ id, type, placeholder, error, ...rest }) => {
         id={id}
         type={type}
         placeholder={placeholder}
+        name={name}
         {...rest}
       />
-      <p className='text-red-500 mt-2 text-xs italic'>{error}</p>
+      <p className='text-red-500 mt-2 text-sm italic'>{error}</p>
     </>
   );
 };

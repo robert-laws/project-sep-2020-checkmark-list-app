@@ -59,7 +59,13 @@ export const Login = () => {
             <Heading>Login to the Checkmark List App</Heading>
           </div>
           <div className='mb-4'>
+            <p className='text-red-500 mt-2 text-xs italic'>
+              {errors.loginError}
+            </p>
+          </div>
+          <div className='mb-4'>
             <Input
+              error={errors.emailError}
               id='email'
               type='email'
               placeholder='Email'
@@ -69,6 +75,7 @@ export const Login = () => {
           </div>
           <div className='mb-4'>
             <Input
+              error={errors.passwordError}
               id='password'
               type='password'
               placeholder='Password'

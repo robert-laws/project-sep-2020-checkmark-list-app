@@ -3,10 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../images/checkmark-outline.svg';
 import Logout from '../components/auth/Logout';
 import AuthContext from '../context/auth/authContext';
+import UserContext from '../context/user/userContext';
 
 export const Header = () => {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
+
+  const userContext = useContext(UserContext);
+  const { profile } = userContext;
 
   return (
     <header className='w-full bg-green-800 flex-initial flex flex-col md:flex-row items-center p-3'>
@@ -75,6 +79,12 @@ export const Header = () => {
         ) : (
           <Logout />
         )}
+
+        {profile ? (
+          <>
+            <span>Welcome, {profile.firstName}</span>
+          </>
+        ) : null}
       </div>
     </header>
   );

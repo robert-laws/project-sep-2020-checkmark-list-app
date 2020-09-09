@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main, Header, Footer } from './sections';
 import {
@@ -12,10 +12,22 @@ import {
   NotFound,
 } from './pages';
 import AuthContext from './context/auth/authContext';
+import UserContext from './context/user/userContext';
 
 function App() {
   const authContext = useContext(AuthContext);
   const { isLoading, user } = authContext;
+
+  const userContext = useContext(UserContext);
+  const { getUserByUid, removeUser } = userContext;
+
+  useEffect(() => {
+    if (user !== null) {
+      getUserByUid(user);
+    } else {
+      removeUser();
+    }
+  }, [user]);
 
   return (
     <Router>

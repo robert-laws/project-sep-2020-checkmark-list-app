@@ -52,7 +52,7 @@ export const Footer = () => {
           </a>
         </div>
         <div className='flex flex-row md:order-first justify-center my-3 md:w-64'>
-          <Link exact to='/'>
+          <Link to='/'>
             <Logo
               className='h-6 w-6 mx-2'
               style={{

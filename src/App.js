@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main, Header, Footer } from './sections';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import {
   Home,
   About,
@@ -36,12 +37,34 @@ function App() {
         <Main>
           <Switch>
             <Route exact path='/' component={Home} />
+
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
 
-            <Route path='/profile' component={Profile} />
-            <Route path='/keywords' component={Keywords} />
-            <Route path='/lists' component={Lists} />
+            <ProtectedRoute
+              isAuthed={!!user}
+              isLoading={isLoading}
+              path='/profile'
+              exact
+            >
+              <Profile />
+            </ProtectedRoute>
+            <ProtectedRoute
+              isAuthed={!!user}
+              isLoading={isLoading}
+              path='/keywords'
+              exact
+            >
+              <Keywords />
+            </ProtectedRoute>
+            <ProtectedRoute
+              isAuthed={!!user}
+              isLoading={isLoading}
+              path='/lists'
+              exact
+            >
+              <Lists />
+            </ProtectedRoute>
 
             <Route path='/about' component={About} />
             <Route path='*' component={NotFound} />

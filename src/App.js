@@ -49,6 +49,7 @@ function App() {
             >
               <Profile />
             </ProtectedRoute>
+
             <ProtectedRoute
               isAuthed={!!user}
               isLoading={isLoading}
@@ -57,6 +58,7 @@ function App() {
             >
               <Keywords />
             </ProtectedRoute>
+
             <ProtectedRoute
               isAuthed={!!user}
               isLoading={isLoading}

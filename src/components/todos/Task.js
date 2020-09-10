@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TasksContext from '../../context/tasks/tasksContext';
+// import TasksContext from '../../context/tasks/tasksContext';
 
 export const Task = ({ id, completed = false, title }) => {
   const [checkedBox, setCheckedBox] = useState(completed);

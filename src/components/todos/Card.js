@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heading, Button } from '../ui';
-import { Task, Keyword } from './';
+import { TaskList, Keyword } from './';
 
 export const Card = ({ title, tasks, keywords }) => {
   return (
@@ -11,16 +11,7 @@ export const Card = ({ title, tasks, keywords }) => {
           {/* <h4 className='text-gray-900 font-bold text-xl'>{title}</h4> */}
         </div>
         <div className='mb-2 border-b px-4 py-3'>
-          {tasks &&
-            tasks.length > 0 &&
-            tasks.map((task) => (
-              <Task
-                key={task.id}
-                id={task.id}
-                title={task.title}
-                completed={task.completed}
-              />
-            ))}
+          {tasks && tasks.length > 0 && <TaskList tasks={tasks} />}
 
           {!tasks || (tasks.length === 0 && <p>No Tasks</p>)}
         </div>

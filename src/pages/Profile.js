@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import spinner from '../images/spinner.gif';
 import { Page, PageHeading } from '../components/ui';
 import UserContext from '../context/user/userContext';
 
@@ -10,8 +11,8 @@ export const Profile = () => {
     return (
       <Page>
         <PageHeading title='Profile' />
-        <div>
-          <h3 className='inline-block text-black'>Loading...</h3>
+        <div className='w-72'>
+          <img alt='spinner' src={spinner} />
         </div>
       </Page>
     );

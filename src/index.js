@@ -12,7 +12,6 @@ import AuthState from './context/auth/AuthState';
 import UserState from './context/user/UserState';
 import TodosState from './context/todos/TodosState';
 import TasksState from './context/tasks/TasksState';
-import { Task } from './components/todos';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {

@@ -18,7 +18,7 @@ export const Task = ({ id, completed = false, title }) => {
         className='checked:bg-gray-900 checked:border-transparent'
       />
       <label
-        htmlFor='myCheck0'
+        htmlFor={id}
         className={`ml-2  ${
           checkedBox ? 'line-through text-gray-500' : 'text-black'
         }`}

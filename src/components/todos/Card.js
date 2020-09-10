@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heading, Button, Task, Keyword } from './';
+import { Heading, Button } from '../ui';
+import { Task, Keyword } from './';
 
 export const Card = ({ title, tasks, keywords }) => {
   return (

@@ -10,6 +10,7 @@ import 'firebase/firestore';
 
 import AuthState from './context/auth/AuthState';
 import UserState from './context/user/UserState';
+import TodosState from './context/todos/TodosState';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -29,7 +30,9 @@ ReactDOM.render(
   <React.StrictMode>
     <AuthState>
       <UserState>
-        <App />
+        <TodosState>
+          <App />
+        </TodosState>
       </UserState>
     </AuthState>
   </React.StrictMode>,

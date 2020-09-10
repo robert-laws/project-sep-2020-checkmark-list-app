@@ -11,9 +11,18 @@ export const Card = ({ title, tasks, keywords }) => {
           {/* <h4 className='text-gray-900 font-bold text-xl'>{title}</h4> */}
         </div>
         <div className='mb-2 border-b px-4 py-3'>
-          {tasks.map((task, index) => (
-            <Task key={index} title={task.title} completed={task.completed} />
-          ))}
+          {tasks &&
+            tasks.length > 0 &&
+            tasks.map((task) => (
+              <Task
+                key={task.id}
+                id={task.id}
+                title={task.title}
+                completed={task.completed}
+              />
+            ))}
+
+          {!tasks || (tasks.length === 0 && <p>No Tasks</p>)}
         </div>
         <div className='px-4 pb-3 w-full flex flex-col'>
           <p className='text-gray-500 text-base'>

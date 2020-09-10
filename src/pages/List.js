@@ -5,12 +5,17 @@ import { Page } from '../components/ui';
 import { Card } from '../components/todos';
 
 import TodosContext from '../context/todos/todosContext';
+import TasksContext from '../context/tasks/tasksContext';
 
 export const List = () => {
   const todosContext = useContext(TodosContext);
-  const { todo, error, getTodoById } = todosContext; // getTodoById(id)
+  const { todo, error, getTodoById } = todosContext;
+
+  const tasksContext = useContext(TasksContext);
+  const { tasks, getTasksByTodoId } = tasksContext;
 
   const [isSpinning, setIsSpinning] = useState(true);
+  const [isSpinningTwo, setIsSpinningTwo] = useState(true);
 
   const { id } = useParams();
 
@@ -23,6 +28,17 @@ export const List = () => {
     };
 
     getTodo();
+  }, [id]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      if (id) {
+        await getTasksByTodoId(id);
+        setIsSpinningTwo(false);
+      }
+    };
+
+    getTasks();
   }, [id]);
 
   return (
@@ -44,12 +60,8 @@ export const List = () => {
               </div>
             )}
 
-            {!error && !isSpinning && (
-              <Card
-                title={todo.title}
-                tasks={[{ title: 'Paint room', completed: false }]}
-                keywords={todo.keywords}
-              />
+            {!error && !isSpinning && !isSpinningTwo && (
+              <Card title={todo.title} tasks={tasks} keywords={todo.keywords} />
             )}
           </div>
         </div>

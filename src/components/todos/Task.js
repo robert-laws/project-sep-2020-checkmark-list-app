@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TasksContext from '../../context/tasks/tasksContext';
 
-export const Task = ({ completed = false, title }) => {
+export const Task = ({ id, completed = false, title }) => {
+  const [checkedBox, setCheckedBox] = useState(completed);
+
+  const handleChange = () => {
+    setCheckedBox(!checkedBox);
+  };
+
   return (
     <div className='mb-2'>
       <input
-        id='myCheck0'
-        checked={completed}
+        id={id}
+        checked={checkedBox}
+        onChange={handleChange}
         type='checkbox'
         className='checked:bg-gray-900 checked:border-transparent'
       />
-      <label htmlFor='myCheck0' className='ml-2 text-black'>
+      <label
+        htmlFor='myCheck0'
+        className={`ml-2  ${
+          checkedBox ? 'line-through text-gray-500' : 'text-black'
+        }`}
+      >
         {title}
       </label>
     </div>

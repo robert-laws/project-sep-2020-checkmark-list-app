@@ -6,6 +6,7 @@ import {
   Home,
   About,
   Keywords,
+  List,
   Lists,
   Login,
   Profile,
@@ -66,6 +67,15 @@ function App() {
               exact
             >
               <Lists />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              isAuthed={!!user}
+              isLoading={isLoading}
+              path='/list/:id'
+              exact
+            >
+              <List />
             </ProtectedRoute>
 
             <Route path='/about' component={About} />

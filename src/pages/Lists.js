@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import spinner from '../images/spinner.gif';
 import { Page } from '../components/ui';
-import { Card } from '../components/todos';
+import { TodoBase } from '../components/todos';
 import AuthContext from '../context/auth/authContext';
 import TodosContext from '../context/todos/todosContext';
 
@@ -46,15 +46,7 @@ export const Lists = () => {
           {!error &&
             !isSpinning &&
             todos.map((todo) => (
-              <Card
-                key='todo.id'
-                title={todo.title}
-                tasks={[
-                  { title: 'Plant new flowers by deck', completed: false },
-                  { title: 'Add some fertilizer', completed: true },
-                ]}
-                keywords={['cleaning', 'lawn']}
-              />
+              <TodoBase key={todo.id} todoId={todo.id} title={todo.title} />
             ))}
         </div>
       </div>

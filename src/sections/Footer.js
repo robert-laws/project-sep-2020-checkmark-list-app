@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../images/checkmark-outline.svg';
+import AuthContext from '../context/auth/authContext';
 
 export const Footer = () => {
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
   return (
     <footer className='flex flex-initial flex-col items-center w-full bg-green-800 pb-2'>
       <div className='flex flex-initial flex-col md:flex-row items-center md:items-start md:justify-center w-full text-white p-4'>
@@ -11,15 +15,27 @@ export const Footer = () => {
           <Link to='/' className='hover:text-green-300 text-gray-400'>
             Home
           </Link>
-          <Link to='/lists' className='hover:text-green-300 text-gray-400'>
-            Checkmark Lists
-          </Link>
-          <Link to='/profil' className='hover:text-green-300 text-gray-400'>
-            Profile
-          </Link>
-          <Link to='/keywords' className='hover:text-green-300 text-gray-400'>
-            Keywords
-          </Link>
+          {user ? (
+            <>
+              <Link to='/lists' className='hover:text-green-300 text-gray-400'>
+                Checkmark Lists
+              </Link>
+              <Link
+                to='/profile'
+                className='hover:text-green-300 text-gray-400'
+              >
+                Profile
+              </Link>
+              <Link
+                to='/keywords'
+                className='hover:text-green-300 text-gray-400'
+              >
+                Keywords
+              </Link>
+            </>
+          ) : (
+            ''
+          )}
           <Link to='/about' className='hover:text-green-300 text-gray-400'>
             About
           </Link>

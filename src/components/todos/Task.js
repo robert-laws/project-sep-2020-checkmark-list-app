@@ -45,8 +45,8 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
       >
         {title}
       </label>
-      <button onClick={handleClick} className='ml-2 flex-1'>
-        {editTask ? (
+      {editTask ? (
+        <button onClick={handleClick} className='ml-2 flex-1'>
           <Close
             title='delete task'
             id={id}
@@ -57,10 +57,10 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
               float: 'right',
             }}
           />
-        ) : (
-          ''
-        )}
-      </button>
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

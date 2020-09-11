@@ -70,6 +70,7 @@ export const Header = () => {
         >
           About
         </NavLink>
+
         {!user ? (
           <>
             <NavLink

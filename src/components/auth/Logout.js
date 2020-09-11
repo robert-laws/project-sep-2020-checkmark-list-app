@@ -1,12 +1,14 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 
 const Logout = () => {
+  const history = useHistory();
+
   const logoutUser = async () => {
     try {
       await firebase.auth().signOut();
-      return <Redirect to='/' />;
+      history.push('/');
     } catch (error) {
       console.error('error signing out...', error);
     }

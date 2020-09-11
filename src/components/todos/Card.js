@@ -1,6 +1,6 @@
 import React from 'react';
-import { Heading, Button } from '../ui';
-import { TaskList, Keyword } from './';
+import { Heading } from '../ui';
+import { TaskList, KeywordList } from './';
 
 export const Card = ({ title, tasks, keywords }) => {
   return (
@@ -8,23 +8,11 @@ export const Card = ({ title, tasks, keywords }) => {
       <div>
         <div className='mb-2 border-b px-4 py-3'>
           <Heading>{title}</Heading>
-          {/* <h4 className='text-gray-900 font-bold text-xl'>{title}</h4> */}
         </div>
-        <>{tasks && <TaskList tasks={tasks} />}</>
-        <div className='px-4 pb-3 w-full flex flex-col'>
-          <p className='text-gray-500 text-base'>
-            keywords:{' '}
-            {keywords.map((keyword, index) => {
-              if (keywords.length - 1 === index) {
-                return <Keyword key={index} keyword={keyword} separator={''} />;
-              } else {
-                return (
-                  <Keyword key={index} keyword={keyword} separator={', '} />
-                );
-              }
-            })}
-          </p>
-        </div>
+        <>
+          {tasks && <TaskList tasks={tasks} />}
+          {keywords && <KeywordList keywords={keywords} />}
+        </>
       </div>
     </div>
   );

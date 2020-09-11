@@ -10,11 +10,7 @@ export const Card = ({ title, tasks, keywords }) => {
           <Heading>{title}</Heading>
           {/* <h4 className='text-gray-900 font-bold text-xl'>{title}</h4> */}
         </div>
-        <div className='mb-2 border-b px-4 py-3'>
-          {tasks && tasks.length > 0 && <TaskList tasks={tasks} />}
-
-          {!tasks || (tasks.length === 0 && <p>No Tasks</p>)}
-        </div>
+        <>{tasks && <TaskList tasks={tasks} />}</>
         <div className='px-4 pb-3 w-full flex flex-col'>
           <p className='text-gray-500 text-base'>
             keywords:{' '}
@@ -28,9 +24,6 @@ export const Card = ({ title, tasks, keywords }) => {
               }
             })}
           </p>
-          <div className='self-end'>
-            <Button size='small'>Edit List</Button>
-          </div>
         </div>
       </div>
     </div>

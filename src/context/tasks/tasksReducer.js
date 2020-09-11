@@ -1,4 +1,8 @@
-import { GET_TASKS_BY_TODO_ID, TASKS_ERROR } from '../types';
+import {
+  GET_TASKS_BY_TODO_ID,
+  GET_TASKS_BY_USER_ID,
+  TASKS_ERROR,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,10 +12,16 @@ export default (state, action) => {
         tasks: action.payload,
       };
 
+    case GET_TASKS_BY_USER_ID:
+      return {
+        ...state,
+        tasks: action.payload,
+      };
+
     case TASKS_ERROR:
       return {
         ...state,
-        error: action.payload,
+        tasksError: action.payload,
       };
 
     default:

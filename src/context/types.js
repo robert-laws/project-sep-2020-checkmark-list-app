@@ -13,4 +13,5 @@ export const TODOS_ERROR = 'TODOS_ERROR';
 
 // TASKS
 export const GET_TASKS_BY_TODO_ID = 'GET_TASKS_BY_TODO_ID';
+export const GET_TASKS_BY_USER_ID = 'GET_TASKS_BY_USER_ID';
 export const TASKS_ERROR = 'TASKS_ERROR';

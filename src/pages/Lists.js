@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import spinner from '../images/spinner.gif';
 import { Page } from '../components/ui';
-import { TodoBase } from '../components/todos';
+import { TodoBase, TaskList } from '../components/todos';
 import AuthContext from '../context/auth/authContext';
 import TodosContext from '../context/todos/todosContext';
+import TasksContext from '../context/tasks/tasksContext';
 
 export const Lists = () => {
   const authContext = useContext(AuthContext);
@@ -11,6 +12,9 @@ export const Lists = () => {
 
   const todosContext = useContext(TodosContext);
   const { todos, error, getTodosByUserId } = todosContext;
+
+  const tasksContext = useContext(TasksContext);
+  const { tasks, tasksError, getTasksByUserId } = tasksContext;
 
   const [isSpinning, setIsSpinning] = useState(true);
 
@@ -24,6 +28,23 @@ export const Lists = () => {
 
     getTodos();
   }, [user]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      if (user) {
+        await getTasksByUserId(user);
+      }
+    };
+
+    getTasks();
+  }, [user]);
+
+  const divideTasks = (todoId) => {
+    if (tasks) {
+      const todoTasks = tasks.filter((task) => task.todoId === todoId);
+      return todoTasks;
+    }
+  };
 
   return (
     <Page>
@@ -43,10 +64,12 @@ export const Lists = () => {
             </div>
           )}
 
-          {!error &&
+          {!tasksError &&
             !isSpinning &&
             todos.map((todo) => (
-              <TodoBase key={todo.id} todoId={todo.id} title={todo.title} />
+              <TodoBase key={todo.id} todoId={todo.id} title={todo.title}>
+                <TaskList tasks={divideTasks(todo.id)} />
+              </TodoBase>
             ))}
         </div>
       </div>

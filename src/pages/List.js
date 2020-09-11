@@ -9,7 +9,7 @@ import TasksContext from '../context/tasks/tasksContext';
 
 export const List = () => {
   const todosContext = useContext(TodosContext);
-  const { todo, error, getTodoById } = todosContext;
+  const { todo, todosError, getTodoById } = todosContext;
 
   const tasksContext = useContext(TasksContext);
   const { tasks, getTasksByTodoId } = tasksContext;
@@ -49,7 +49,7 @@ export const List = () => {
         </div>
 
         <div className='flex flex-wrap items-start'>
-          {error && <h3>Error retrieving Todos</h3>}
+          {todosError && <h3>Error retrieving Todos</h3>}
 
           {!isSpinning && !todo && <h4>No List Found</h4>}
 
@@ -60,7 +60,7 @@ export const List = () => {
               </div>
             )}
 
-            {!error && !isSpinning && !isSpinningTwo && (
+            {!todosError && !isSpinning && !isSpinningTwo && (
               <Card
                 title={todo.title}
                 todoId={id}

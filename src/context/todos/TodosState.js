@@ -1,14 +1,19 @@
 import React, { useReducer } from 'react';
 import TodosContext from './todosContext';
 import todosReducer from './todosReducer';
-import { GET_TODOS_BY_USER_ID, GET_TODO_BY_ID, TODOS_ERROR } from '../types';
+import {
+  GET_TODOS_BY_USER_ID,
+  GET_TODO_BY_ID,
+  CREATE_TODO,
+  TODOS_ERROR,
+} from '../types';
 import firebase from 'firebase/app';
 
 const TodosState = ({ children }) => {
   const initialState = {
     todos: null,
     todo: null,
-    error: null,
+    todosError: null,
   };
 
   const [state, dispatch] = useReducer(todosReducer, initialState);
@@ -18,6 +23,7 @@ const TodosState = ({ children }) => {
       const todosSnapshot = await firebase
         .firestore()
         .collection('todos')
+        .orderBy('createdAt', 'asc')
         .where('userId', '==', uid)
         .get();
 
@@ -28,6 +34,7 @@ const TodosState = ({ children }) => {
 
       dispatch({ type: GET_TODOS_BY_USER_ID, payload: todos });
     } catch (error) {
+      console.log(error);
       dispatch({ type: TODOS_ERROR, payload: error.message });
     }
   };
@@ -51,14 +58,29 @@ const TodosState = ({ children }) => {
     }
   };
 
+  const createTodo = async (todo) => {
+    try {
+      const newTodo = await firebase.firestore().collection('todos').add(todo);
+      const todoObject = {
+        id: newTodo.id,
+        ...todo,
+      };
+
+      dispatch({ type: CREATE_TODO, payload: todoObject });
+    } catch (error) {
+      dispatch({ type: TODOS_ERROR, payload: error.message });
+    }
+  };
+
   return (
     <TodosContext.Provider
       value={{
         todos: state.todos,
         todo: state.todo,
-        error: state.error,
+        todosError: state.todosError,
         getTodosByUserId,
         getTodoById,
+        createTodo,
       }}
     >
       {children}

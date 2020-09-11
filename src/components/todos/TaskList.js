@@ -26,6 +26,7 @@ export const TaskList = ({ todoId, userId, editing = false, tasks }) => {
           title: event.target.value,
           userId,
           todoId,
+          createdAt: Date.now(),
         };
 
         await createTask(myTask);

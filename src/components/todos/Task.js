@@ -30,17 +30,15 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
     <div className='mb-3 flex items-center justify-between w-full'>
       <div>
         <input
-          className='flex-initial'
           id={id}
           checked={completed}
           onChange={handleChange}
           type='checkbox'
-          className='checked:bg-gray-900 checked:border-transparent'
+          className='flex-initial checked:bg-gray-900 checked:border-transparent'
         />
         <label
-          className='flex-initial'
           htmlFor={id}
-          className={`ml-2  ${
+          className={`flex-initial ml-2  ${
             completed ? 'line-through text-gray-500' : 'text-black'
           }`}
         >

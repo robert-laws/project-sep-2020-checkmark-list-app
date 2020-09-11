@@ -24,6 +24,7 @@ const TasksState = ({ children }) => {
       const tasksSnapshot = await firebase
         .firestore()
         .collection('tasks')
+        .orderBy('createdAt', 'asc')
         .where('todoId', '==', id)
         .get();
 
@@ -43,6 +44,7 @@ const TasksState = ({ children }) => {
       const tasksSnapshot = await firebase
         .firestore()
         .collection('tasks')
+        .orderBy('createdAt', 'asc')
         .where('userId', '==', uid)
         .get();
 

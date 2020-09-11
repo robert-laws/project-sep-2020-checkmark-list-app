@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import spinner from '../images/spinner.gif';
 import { Page } from '../components/ui';
-import { TodoBase, TaskList } from '../components/todos';
+import { TodoBase, TaskList, KeywordList } from '../components/todos';
 import AuthContext from '../context/auth/authContext';
 import TodosContext from '../context/todos/todosContext';
 import TasksContext from '../context/tasks/tasksContext';
@@ -69,6 +69,7 @@ export const Lists = () => {
             todos.map((todo) => (
               <TodoBase key={todo.id} todoId={todo.id} title={todo.title}>
                 <TaskList tasks={divideTasks(todo.id)} />
+                <KeywordList keywords={todo.keywords} />
               </TodoBase>
             ))}
         </div>

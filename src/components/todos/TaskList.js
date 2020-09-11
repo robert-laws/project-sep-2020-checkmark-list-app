@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import spinner from '../../images/spinner.gif';
 import { Task } from './';
 
-export const TaskList = ({ tasks }) => {
+export const TaskList = ({ editing = false, tasks }) => {
   const [isSpinning, setIsSpinning] = useState(true);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ export const TaskList = ({ tasks }) => {
             title={task.title}
             completed={task.completed}
             {...task}
+            editTask={editing}
           />
         ))}
     </div>

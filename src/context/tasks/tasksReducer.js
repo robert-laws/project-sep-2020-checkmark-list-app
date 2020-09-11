@@ -2,6 +2,7 @@ import {
   GET_TASKS_BY_TODO_ID,
   GET_TASKS_BY_USER_ID,
   UPDATE_TASK,
+  DELETE_TASK,
   TASKS_ERROR,
 } from '../types';
 
@@ -27,6 +28,13 @@ export default (state, action) => {
         tasks: state.tasks.map((task) =>
           task.id === action.payload.id ? action.payload : task
         ),
+        tasksError: null,
+      };
+
+    case DELETE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload),
         tasksError: null,
       };
 

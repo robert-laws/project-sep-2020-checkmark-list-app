@@ -10,7 +10,7 @@ export const Card = ({ title, tasks, keywords }) => {
           <Heading>{title}</Heading>
         </div>
         <>
-          {tasks && <TaskList tasks={tasks} />}
+          {tasks && <TaskList tasks={tasks} editing={true} />}
           {keywords && <KeywordList keywords={keywords} />}
         </>
       </div>

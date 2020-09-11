@@ -5,6 +5,7 @@ import {
   GET_TASKS_BY_TODO_ID,
   GET_TASKS_BY_USER_ID,
   UPDATE_TASK,
+  DELETE_TASK,
   TASKS_ERROR,
 } from '../types';
 import firebase from 'firebase/app';
@@ -71,6 +72,15 @@ const TasksState = ({ children }) => {
     }
   };
 
+  const deleteTask = async (id) => {
+    try {
+      await firebase.firestore().collection('tasks').doc(id).delete();
+      dispatch({ type: DELETE_TASK, payload: id });
+    } catch (error) {
+      dispatch({ type: TASKS_ERROR, payload: error.message });
+    }
+  };
+
   return (
     <TasksContext.Provider
       value={{
@@ -79,6 +89,7 @@ const TasksState = ({ children }) => {
         getTasksByTodoId,
         getTasksByUserId,
         updateTask,
+        deleteTask,
       }}
     >
       {children}

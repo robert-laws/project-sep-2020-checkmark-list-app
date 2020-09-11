@@ -1,6 +1,7 @@
 import {
   GET_TASKS_BY_TODO_ID,
   GET_TASKS_BY_USER_ID,
+  UPDATE_TASK,
   TASKS_ERROR,
 } from '../types';
 
@@ -10,12 +11,23 @@ export default (state, action) => {
       return {
         ...state,
         tasks: action.payload,
+        tasksError: null,
       };
 
     case GET_TASKS_BY_USER_ID:
       return {
         ...state,
         tasks: action.payload,
+        tasksError: null,
+      };
+
+    case UPDATE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.id ? action.payload : task
+        ),
+        tasksError: null,
       };
 
     case TASKS_ERROR:

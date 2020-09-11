@@ -29,6 +29,7 @@ export const TaskList = ({ tasks }) => {
             id={task.id}
             title={task.title}
             completed={task.completed}
+            {...task}
           />
         ))}
     </div>

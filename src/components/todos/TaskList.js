@@ -1,15 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import spinner from '../../images/spinner.gif';
+import { Input } from '../ui/';
 import { Task } from './';
+import TasksContext from '../../context/tasks/tasksContext';
 
-export const TaskList = ({ editing = false, tasks }) => {
+export const TaskList = ({ todoId, userId, editing = false, tasks }) => {
+  const tasksContext = useContext(TasksContext);
+  const { createTask } = tasksContext;
+
   const [isSpinning, setIsSpinning] = useState(true);
+  const [title, setTitle] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (tasks) {
       setIsSpinning(false);
     }
   }, [tasks]);
+
+  const handleKeyDown = async (event) => {
+    if (event.keyCode === 13) {
+      if (event.target.value !== '') {
+        const myTask = {
+          completed: false,
+          title: event.target.value,
+          userId,
+          todoId,
+        };
+
+        await createTask(myTask);
+
+        setError('');
+        setTitle('');
+      } else {
+        setError('Please enter a task');
+      }
+    }
+  };
 
   return (
     <div className='mb-2 border-b px-4 py-3'>
@@ -33,6 +60,23 @@ export const TaskList = ({ editing = false, tasks }) => {
             editTask={editing}
           />
         ))}
+
+      {editing ? (
+        <div className='mt-5 mb-1'>
+          <Input
+            error={error}
+            id='title'
+            name='title'
+            type='text'
+            placeholder='New Task Title'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

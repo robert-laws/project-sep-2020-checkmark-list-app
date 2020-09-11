@@ -61,7 +61,13 @@ export const List = () => {
             )}
 
             {!error && !isSpinning && !isSpinningTwo && (
-              <Card title={todo.title} tasks={tasks} keywords={todo.keywords} />
+              <Card
+                title={todo.title}
+                todoId={id}
+                userId={todo.userId}
+                tasks={tasks}
+                keywords={todo.keywords}
+              />
             )}
           </div>
         </div>

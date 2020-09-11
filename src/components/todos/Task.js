@@ -20,41 +20,41 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
     updateTask(task);
   };
 
-  const handleClick = (event) => {
+  const handleClick = async (event) => {
     const taskId = event.target.id;
 
-    deleteTask(taskId);
+    await deleteTask(taskId);
   };
 
   return (
-    <div className='mb-3 flex items-center w-full'>
-      <input
-        className='flex-initial'
-        id={id}
-        checked={completed}
-        onChange={handleChange}
-        type='checkbox'
-        className='checked:bg-gray-900 checked:border-transparent'
-      />
-      <label
-        className='flex-initial'
-        htmlFor={id}
-        className={`ml-2  ${
-          completed ? 'line-through text-gray-500' : 'text-black'
-        }`}
-      >
-        {title}
-      </label>
+    <div className='mb-3 flex items-center justify-between w-full'>
+      <div>
+        <input
+          className='flex-initial'
+          id={id}
+          checked={completed}
+          onChange={handleChange}
+          type='checkbox'
+          className='checked:bg-gray-900 checked:border-transparent'
+        />
+        <label
+          className='flex-initial'
+          htmlFor={id}
+          className={`ml-2  ${
+            completed ? 'line-through text-gray-500' : 'text-black'
+          }`}
+        >
+          {title}
+        </label>
+      </div>
       {editTask ? (
-        <button onClick={handleClick} className='ml-2 flex-1'>
+        <button onClick={handleClick} className='ml-2 flex-initial'>
           <Close
             title='delete task'
             id={id}
             style={{
               height: '16px',
-              fontWeight: 'bold',
               fill: '#F00',
-              float: 'right',
             }}
           />
         </button>

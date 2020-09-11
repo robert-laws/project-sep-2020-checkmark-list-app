@@ -1,6 +1,7 @@
 import {
   GET_TASKS_BY_TODO_ID,
   GET_TASKS_BY_USER_ID,
+  CREATE_TASK,
   UPDATE_TASK,
   DELETE_TASK,
   TASKS_ERROR,
@@ -19,6 +20,13 @@ export default (state, action) => {
       return {
         ...state,
         tasks: action.payload,
+        tasksError: null,
+      };
+
+    case CREATE_TASK:
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload],
         tasksError: null,
       };
 

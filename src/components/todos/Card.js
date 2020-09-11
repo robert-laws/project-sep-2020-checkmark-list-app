@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from '../ui';
 import { TaskList, KeywordList } from './';
 
-export const Card = ({ title, tasks, keywords }) => {
+export const Card = ({ title, todoId, userId, tasks, keywords }) => {
   return (
     <div className='w-96 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
       <div>
@@ -10,7 +10,14 @@ export const Card = ({ title, tasks, keywords }) => {
           <Heading>{title}</Heading>
         </div>
         <>
-          {tasks && <TaskList tasks={tasks} editing={true} />}
+          {tasks && (
+            <TaskList
+              tasks={tasks}
+              editing={true}
+              todoId={todoId}
+              userId={userId}
+            />
+          )}
           {keywords && <KeywordList keywords={keywords} />}
         </>
       </div>

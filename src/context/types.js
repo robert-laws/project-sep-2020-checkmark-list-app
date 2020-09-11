@@ -15,5 +15,6 @@ export const TODOS_ERROR = 'TODOS_ERROR';
 export const GET_TASKS_BY_TODO_ID = 'GET_TASKS_BY_TODO_ID';
 export const GET_TASKS_BY_USER_ID = 'GET_TASKS_BY_USER_ID';
 export const TASKS_ERROR = 'TASKS_ERROR';
+export const CREATE_TASK = 'CREATE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';

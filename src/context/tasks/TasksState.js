@@ -4,6 +4,7 @@ import tasksReducer from './tasksReducer';
 import {
   GET_TASKS_BY_TODO_ID,
   GET_TASKS_BY_USER_ID,
+  CREATE_TASK,
   UPDATE_TASK,
   DELETE_TASK,
   TASKS_ERROR,
@@ -56,6 +57,20 @@ const TasksState = ({ children }) => {
     }
   };
 
+  const createTask = async (task) => {
+    try {
+      const newTask = await firebase.firestore().collection('tasks').add(task);
+      const taskObject = {
+        id: newTask.id,
+        ...task,
+      };
+
+      dispatch({ type: CREATE_TASK, payload: taskObject });
+    } catch (error) {
+      dispatch({ type: TASKS_ERROR, payload: error.message });
+    }
+  };
+
   const updateTask = async (task) => {
     const { id, title, completed } = task;
 
@@ -88,6 +103,7 @@ const TasksState = ({ children }) => {
         tasksError: state.tasksError,
         getTasksByTodoId,
         getTasksByUserId,
+        createTask,
         updateTask,
         deleteTask,
       }}

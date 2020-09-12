@@ -38,11 +38,11 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
   };
 
   return (
-    <div className='w-96 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
+    <div className='w-120 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
       <div>
         <div className='mb-2 border-b px-4 py-3'>
           {editTodo ? (
-            <>
+            <div className='flex'>
               <Input
                 id={todoId}
                 type='text'
@@ -57,14 +57,14 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
               <Button type='button' color='red' onClick={handleEditCancel}>
                 Cancel
               </Button>
-            </>
+            </div>
           ) : (
-            <>
+            <div className='flex justify-between'>
               <Heading>{title}</Heading>{' '}
               <Button onClick={handleEditToggle} type='button'>
                 Edit
               </Button>
-            </>
+            </div>
           )}
         </div>
         <>

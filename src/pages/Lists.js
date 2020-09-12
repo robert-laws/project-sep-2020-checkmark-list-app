@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import spinner from '../images/spinner.gif';
-import { Page, Input } from '../components/ui';
+import { Page, PageHeading, Input } from '../components/ui';
 import { TodoBase, TaskList, KeywordList } from '../components/todos';
 import AuthContext from '../context/auth/authContext';
 import TodosContext from '../context/todos/todosContext';
@@ -74,7 +74,7 @@ export const Lists = () => {
     <Page>
       <div className='flex flex-col justify-start items-start w-full h-full'>
         <div className='w-full mb-3'>
-          <h1 className='text-3xl border-b pb-2'>Your Checkmark Lists</h1>
+          <PageHeading title='Your Checkmark Lists' />
         </div>
 
         {!isSpinning && todos.length === 0 && <h4>No Lists Found</h4>}

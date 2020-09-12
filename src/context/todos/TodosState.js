@@ -5,6 +5,7 @@ import {
   GET_TODOS_BY_USER_ID,
   GET_TODO_BY_ID,
   CREATE_TODO,
+  UPDATE_SINGLE_TODO,
   TODOS_ERROR,
 } from '../types';
 import firebase from 'firebase/app';
@@ -72,6 +73,18 @@ const TodosState = ({ children }) => {
     }
   };
 
+  const updateTodo = async (todo) => {
+    const { id, title } = todo;
+
+    try {
+      await firebase.firestore().collection('todos').doc(id).update({ title });
+
+      dispatch({ type: UPDATE_SINGLE_TODO, payload: todo });
+    } catch (error) {
+      dispatch({ type: TODOS_ERROR, payload: error.message });
+    }
+  };
+
   return (
     <TodosContext.Provider
       value={{
@@ -81,6 +94,7 @@ const TodosState = ({ children }) => {
         getTodosByUserId,
         getTodoById,
         createTodo,
+        updateTodo,
       }}
     >
       {children}

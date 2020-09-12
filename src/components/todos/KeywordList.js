@@ -22,7 +22,7 @@ export const KeywordList = ({ keywords }) => {
       {keywords && keywords.length === 0 && <p>No Keywords</p>}
 
       {keywords && keywords.length > 0 && (
-        <p className='text-gray-500 text-base'>
+        <p className='text-black text-base'>
           keywords:{' '}
           {keywords.map((keyword, index) => {
             if (keywords.length - 1 === index) {

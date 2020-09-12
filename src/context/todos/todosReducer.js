@@ -2,6 +2,7 @@ import {
   GET_TODOS_BY_USER_ID,
   GET_TODO_BY_ID,
   CREATE_TODO,
+  UPDATE_SINGLE_TODO,
   TODOS_ERROR,
 } from '../types';
 
@@ -25,6 +26,13 @@ export default (state, action) => {
       return {
         ...state,
         todos: [...state.todos, action.payload],
+        todosError: null,
+      };
+
+    case UPDATE_SINGLE_TODO:
+      return {
+        ...state,
+        todo: action.payload,
         todosError: null,
       };
 

@@ -1,6 +1,12 @@
 import React from 'react';
 
-export const Button = ({ size = 'normal', children }) => {
+export const Button = ({
+  size = 'normal',
+  color = 'blue',
+  type = 'submit',
+  children,
+  ...rest
+}) => {
   const getSizing = (size) => {
     switch (size) {
       case 'normal':
@@ -19,10 +25,11 @@ export const Button = ({ size = 'normal', children }) => {
 
   return (
     <button
-      type='submit'
-      className={`bg-blue-500 hover:bg-blue-700 text-white font-bold ${getSizing(
+      type={type}
+      className={`bg-${color}-500 hover:bg-${color}-700 text-white font-bold mx-1 ${getSizing(
         size
       )} rounded`}
+      {...rest}
     >
       {children}
     </button>

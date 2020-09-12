@@ -8,6 +8,7 @@ import {
   UPDATE_TASK,
   DELETE_TASK,
   TASKS_ERROR,
+  DELETE_TASK_BY_TODO_ID,
 } from '../types';
 import firebase from 'firebase/app';
 
@@ -98,6 +99,25 @@ const TasksState = ({ children }) => {
     }
   };
 
+  const deleteTaskByTodoId = async (todoId) => {
+    try {
+      const tasks = await firebase
+        .firestore()
+        .collection('tasks')
+        .where('todoId', '==', todoId)
+        .get();
+
+      if (tasks.docs.length !== 0) {
+        tasks.forEach((task) => {
+          task.ref.delete();
+          dispatch({ type: DELETE_TASK_BY_TODO_ID, payload: todoId });
+        });
+      }
+    } catch (error) {
+      dispatch({ type: TASKS_ERROR, payload: error.message });
+    }
+  };
+
   return (
     <TasksContext.Provider
       value={{
@@ -108,6 +128,7 @@ const TasksState = ({ children }) => {
         createTask,
         updateTask,
         deleteTask,
+        deleteTaskByTodoId,
       }}
     >
       {children}

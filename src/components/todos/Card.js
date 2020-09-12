@@ -1,12 +1,21 @@
 import React, { useState, useContext } from 'react';
+import spinner from '../../images/spinner.gif';
+import { useHistory } from 'react-router-dom';
 import { Heading, Input, Button } from '../ui';
 import { TaskList, KeywordList } from './';
 import TodosContext from '../../context/todos/todosContext';
+import TasksContext from '../../context/tasks/tasksContext';
 
 export const Card = ({ title, todoId, userId, tasks, keywords }) => {
   const todosContext = useContext(TodosContext);
-  const { updateTodo } = todosContext;
+  const { updateTodo, deleteTodo } = todosContext;
 
+  const tasksContext = useContext(TasksContext);
+  const { deleteTaskByTodoId } = tasksContext;
+
+  const history = useHistory();
+
+  const [isSpinning, setIsSpinning] = useState(false);
   const [editTodo, setEditTodo] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
 
@@ -36,6 +45,24 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
     setEditTodo(false);
     setEditTitle(editTitle);
   };
+
+  const handleDeleteTodo = async () => {
+    setIsSpinning(true);
+
+    await deleteTaskByTodoId(todoId);
+    await deleteTodo(todoId);
+
+    history.push('/lists');
+  };
+
+  if (isSpinning)
+    return (
+      <div className='w-120 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
+        <div className='w-120'>
+          <img alt='spinner' src={spinner} />
+        </div>
+      </div>
+    );
 
   return (
     <div className='w-120 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
@@ -78,6 +105,11 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
           )}
           {keywords && <KeywordList keywords={keywords} />}
         </>
+        <div className='mb-2 px-4 py-3 flex justify-end'>
+          <Button type='button' color='red' onClick={handleDeleteTodo}>
+            Delete Todo
+          </Button>
+        </div>
       </div>
     </div>
   );

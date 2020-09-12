@@ -6,6 +6,7 @@ import {
   GET_TODO_BY_ID,
   CREATE_TODO,
   UPDATE_SINGLE_TODO,
+  DELETE_TODO,
   TODOS_ERROR,
 } from '../types';
 import firebase from 'firebase/app';
@@ -85,6 +86,15 @@ const TodosState = ({ children }) => {
     }
   };
 
+  const deleteTodo = async (id) => {
+    try {
+      await firebase.firestore().collection('todos').doc(id).delete();
+      dispatch({ type: DELETE_TODO, payload: id });
+    } catch (error) {
+      dispatch({ type: TODOS_ERROR, payload: error.message });
+    }
+  };
+
   return (
     <TodosContext.Provider
       value={{
@@ -95,6 +105,7 @@ const TodosState = ({ children }) => {
         getTodoById,
         createTodo,
         updateTodo,
+        deleteTodo,
       }}
     >
       {children}

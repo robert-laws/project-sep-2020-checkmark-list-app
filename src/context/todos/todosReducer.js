@@ -3,6 +3,7 @@ import {
   GET_TODO_BY_ID,
   CREATE_TODO,
   UPDATE_SINGLE_TODO,
+  DELETE_TODO,
   TODOS_ERROR,
 } from '../types';
 
@@ -33,6 +34,13 @@ export default (state, action) => {
       return {
         ...state,
         todo: action.payload,
+        todosError: null,
+      };
+
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: [...state.todos.filter((todo) => todo.id !== action.payload)],
         todosError: null,
       };
 

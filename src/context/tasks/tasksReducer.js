@@ -5,6 +5,7 @@ import {
   UPDATE_TASK,
   DELETE_TASK,
   TASKS_ERROR,
+  DELETE_TASK_BY_TODO_ID,
 } from '../types';
 
 export default (state, action) => {
@@ -43,6 +44,15 @@ export default (state, action) => {
       return {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
+        tasksError: null,
+      };
+
+    case DELETE_TASK_BY_TODO_ID:
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks.filter((task) => task.todoId !== action.payload),
+        ],
         tasksError: null,
       };
 

@@ -52,7 +52,9 @@ export const KeywordList = ({
         </div>
       )}
 
-      {keywords && keywords.length === 0 && <p>No Keywords</p>}
+      {keywords && keywords.length === 0 && (
+        <h4 className='p-4'>No Keywords</h4>
+      )}
 
       {keywords && keywords.length > 0 && (
         <p className='text-black text-base p-4'>

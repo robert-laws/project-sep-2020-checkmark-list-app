@@ -32,7 +32,9 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
     setEditTitle(title);
   };
 
-  const handleEditUpdate = async () => {
+  const handleEditUpdate = async (event) => {
+    event.preventDefault();
+
     const myTodo = {
       id: todoId,
       title: editTitle,
@@ -73,21 +75,21 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
       <div>
         <div className='mb-2 border-b px-4 py-3'>
           {editTodo ? (
-            <div className='flex'>
-              <Input
-                id={todoId}
-                type='text'
-                placeholder='Enter a title'
-                name='title'
-                value={editTitle}
-                onChange={handleTitleChange}
-              />{' '}
-              <Button type='button' onClick={handleEditUpdate}>
-                Update
-              </Button>
-              <Button type='button' color='gray' onClick={handleEditCancel}>
-                Cancel
-              </Button>
+            <div>
+              <form className='flex' onSubmit={handleEditUpdate}>
+                <Input
+                  id={todoId}
+                  type='text'
+                  placeholder='Enter a title'
+                  name='title'
+                  value={editTitle}
+                  onChange={handleTitleChange}
+                />{' '}
+                <Button type='submit'>Update</Button>
+                <Button type='button' color='gray' onClick={handleEditCancel}>
+                  Cancel
+                </Button>
+              </form>
             </div>
           ) : (
             <div className='flex justify-between'>
@@ -122,7 +124,7 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
             Delete Todo
           </Button>
           <Button type='button' color='gray' onClick={handleCancel}>
-            Cancel
+            Return to Lists
           </Button>
         </div>
       </div>

@@ -36,7 +36,9 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
     updateTask(task);
   };
 
-  const handleEditUpdate = async () => {
+  const handleEditUpdate = async (event) => {
+    event.preventDefault();
+
     const task = {
       id,
       completed,
@@ -69,15 +71,23 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
           disabled={editTitleTask}
         />
         {editTitleTask ? (
-          <div className='flex flex-1 w-full'>
-            <Input
-              id='taskTitleId'
-              type='text'
-              placeholder='Enter a title'
-              name='title'
-              value={editTitle}
-              onChange={handleTitleChange}
-            />{' '}
+          <div className='flex w-full'>
+            <form
+              className='flex items-center w-full'
+              onSubmit={handleEditUpdate}
+            >
+              <Input
+                id='taskTitleId'
+                type='text'
+                placeholder='Enter a title'
+                name='title'
+                value={editTitle}
+                onChange={handleTitleChange}
+              />{' '}
+              <Button type='submit' size='small'>
+                Update
+              </Button>
+            </form>
           </div>
         ) : (
           <label
@@ -94,9 +104,6 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
         <div>
           {editTitleTask ? (
             <>
-              <Button type='button' size='small' onClick={handleEditUpdate}>
-                Update
-              </Button>
               <Button
                 type='button'
                 size='small'

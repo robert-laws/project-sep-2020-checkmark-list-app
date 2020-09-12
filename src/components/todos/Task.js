@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Button, Input } from '../ui';
-import { ReactComponent as Close } from '../../images/close.svg';
 import TasksContext from '../../context/tasks/tasksContext';
 
 export const Task = ({ id, completed = false, title, ...rest }) => {
@@ -101,7 +100,7 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
               <Button
                 type='button'
                 size='small'
-                color='red'
+                color='gray'
                 onClick={handleEditCancel}
               >
                 Cancel
@@ -112,18 +111,18 @@ export const Task = ({ id, completed = false, title, ...rest }) => {
               <Button size='small' type='button' onClick={handleEditToggle}>
                 Edit
               </Button>
+              <Button
+                title='delete task'
+                type='button'
+                onClick={handleDeleteClick}
+                size='small'
+                color='red'
+                id={id}
+              >
+                Delete
+              </Button>
             </>
           )}
-          <button onClick={handleDeleteClick} className='ml-2 flex-initial'>
-            <Close
-              title='delete task'
-              id={id}
-              style={{
-                height: '16px',
-                fill: '#F00',
-              }}
-            />
-          </button>
         </div>
       ) : (
         ''

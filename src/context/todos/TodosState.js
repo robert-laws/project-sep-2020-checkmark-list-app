@@ -75,10 +75,14 @@ const TodosState = ({ children }) => {
   };
 
   const updateTodo = async (todo) => {
-    const { id, title } = todo;
+    const { id, title, keywords } = todo;
 
     try {
-      await firebase.firestore().collection('todos').doc(id).update({ title });
+      await firebase
+        .firestore()
+        .collection('todos')
+        .doc(id)
+        .update({ title, keywords });
 
       dispatch({ type: UPDATE_SINGLE_TODO, payload: todo });
     } catch (error) {

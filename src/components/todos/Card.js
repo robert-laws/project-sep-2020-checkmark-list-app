@@ -55,6 +55,10 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
     history.push('/lists');
   };
 
+  const handleCancel = () => {
+    history.push('/lists');
+  };
+
   if (isSpinning)
     return (
       <div className='w-120 border rounded overflow-hidden shadow-lg m-2 flex-auto'>
@@ -81,7 +85,7 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
               <Button type='button' onClick={handleEditUpdate}>
                 Update
               </Button>
-              <Button type='button' color='red' onClick={handleEditCancel}>
+              <Button type='button' color='gray' onClick={handleEditCancel}>
                 Cancel
               </Button>
             </div>
@@ -103,11 +107,22 @@ export const Card = ({ title, todoId, userId, tasks, keywords }) => {
               userId={userId}
             />
           )}
-          {keywords && <KeywordList keywords={keywords} />}
+          {keywords && (
+            <KeywordList
+              keywords={keywords}
+              editing={true}
+              todoId={todoId}
+              todoTitle={title}
+              userId={userId}
+            />
+          )}
         </>
         <div className='mb-2 px-4 py-3 flex justify-end'>
           <Button type='button' color='red' onClick={handleDeleteTodo}>
             Delete Todo
+          </Button>
+          <Button type='button' color='gray' onClick={handleCancel}>
+            Cancel
           </Button>
         </div>
       </div>

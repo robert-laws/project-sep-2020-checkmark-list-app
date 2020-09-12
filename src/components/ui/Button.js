@@ -15,6 +15,9 @@ export const Button = ({
       case 'small':
         return 'text-sm py-1 px-2';
 
+      case 'x-small':
+        return 'text-xs py-1 px-2';
+
       case 'big':
         return 'text-lg py-3 px-6';
 

@@ -29,6 +29,7 @@ function App() {
     } else {
       removeUser();
     }
+    // eslint-disable-next-line
   }, [user]);
 
   return (
@@ -37,7 +38,9 @@ function App() {
         <Header />
         <Main>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/'>
+              <Home hasUser={!!user} />
+            </Route>
 
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />

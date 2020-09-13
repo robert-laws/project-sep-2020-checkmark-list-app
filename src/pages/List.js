@@ -28,6 +28,7 @@ export const List = () => {
     };
 
     getTodo();
+    // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const List = () => {
     };
 
     getTasks();
+    // eslint-disable-next-line
   }, [id]);
 
   return (

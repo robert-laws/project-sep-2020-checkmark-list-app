@@ -27,6 +27,7 @@ export const Keywords = () => {
     };
 
     getTodos();
+    // eslint-disable-next-line
   }, [user]);
 
   const handleSearch = (event) => {

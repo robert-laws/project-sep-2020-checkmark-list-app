@@ -29,6 +29,7 @@ export const Lists = () => {
     };
 
     getTodos();
+    // eslint-disable-next-line
   }, [user]);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const Lists = () => {
     };
 
     getTasks();
+    // eslint-disable-next-line
   }, [user]);
 
   const divideTasks = (todoId) => {

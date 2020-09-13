@@ -43,25 +43,25 @@ export const Footer = () => {
         <div className='flex flex-col items-center my-3 md:w-64'>
           <h4 className='font-bold'>Follow</h4>
           <a
-            href='https://www.google.com'
+            href='https://www.twitter.com'
             className='hover:text-green-300 text-gray-400'
           >
             Twitter
           </a>
           <a
-            href='https://www.google.com'
+            href='https://www.facebook.com'
             className='hover:text-green-300 text-gray-400'
           >
             Facebook
           </a>
           <a
-            href='https://www.google.com'
+            href='https://www.instagram.com'
             className='hover:text-green-300 text-gray-400'
           >
             Instagram
           </a>
           <a
-            href='https://www.google.com'
+            href='https://www.github.com'
             className='hover:text-green-300 text-gray-400'
           >
             Github

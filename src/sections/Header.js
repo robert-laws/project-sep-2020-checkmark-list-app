@@ -17,7 +17,7 @@ export const Header = () => {
 
   return (
     <header className='w-full bg-green-800 flex-initial flex flex-col md:flex-row p-3'>
-      <div className='flex flex-row flex-1 md:flex-1 justify-between items-center w-full h-auto my-3 ml-3'>
+      <div className='flex flex-row flex-1 items-center justify-between h-auto my-3 ml-3'>
         <NavLink
           exact
           to='/'
@@ -46,14 +46,14 @@ export const Header = () => {
         </div>
       </div>
       <div
-        className={`flex flex-col md:flex-row flex-initial justify-center md:justify-end items-center self-center ${
+        className={`flex flex-col md:flex-row flex-initial justify-center md:justify-end self-center ${
           toggle ? 'block' : 'hidden'
         } md:block`}
       >
         <NavLink
           exact
           to='/'
-          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
         >
           Home
         </NavLink>
@@ -62,19 +62,19 @@ export const Header = () => {
           <>
             <NavLink
               to='/lists'
-              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
             >
               To Do Lists
             </NavLink>
             <NavLink
               to='/profile'
-              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
             >
               Profile
             </NavLink>
             <NavLink
               to='/keywords'
-              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
             >
               Keywords
             </NavLink>
@@ -85,7 +85,7 @@ export const Header = () => {
 
         <NavLink
           to='/about'
-          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+          className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
         >
           About
         </NavLink>
@@ -94,13 +94,13 @@ export const Header = () => {
           <>
             <NavLink
               to='/signup'
-              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
             >
               Signup
             </NavLink>
             <NavLink
               to='/login'
-              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white'
+              className='mx-4 my-1 font-bold text-lg hover:text-green-300 text-white text-center'
             >
               Login
             </NavLink>
@@ -111,7 +111,7 @@ export const Header = () => {
 
         {profile ? (
           <>
-            <div className='ml-8 mr-4 my-1 text-lg text-white font-bold'>
+            <div className='ml-8 mr-4 my-1 text-lg text-white font-bold inline-block'>
               <span>Welcome, {profile.firstName}</span>
               <UserIcon
                 className='h-6 w-6 inline-block ml-2'

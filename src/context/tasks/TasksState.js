@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import TasksContext from './tasksContext';
 import tasksReducer from './tasksReducer';
 import {
@@ -20,45 +20,51 @@ const TasksState = ({ children }) => {
 
   const [state, dispatch] = useReducer(tasksReducer, initialState);
 
-  const getTasksByTodoId = async (id) => {
-    try {
-      const tasksSnapshot = await firebase
-        .firestore()
-        .collection('tasks')
-        .orderBy('createdAt', 'asc')
-        .where('todoId', '==', id)
-        .get();
+  const getTasksByTodoId = useCallback(
+    async (id) => {
+      try {
+        const tasksSnapshot = await firebase
+          .firestore()
+          .collection('tasks')
+          .orderBy('createdAt', 'asc')
+          .where('todoId', '==', id)
+          .get();
 
-      const tasks = tasksSnapshot.docs.map((task) => ({
-        ...task.data(),
-        id: task.id,
-      }));
+        const tasks = tasksSnapshot.docs.map((task) => ({
+          ...task.data(),
+          id: task.id,
+        }));
 
-      dispatch({ type: GET_TASKS_BY_TODO_ID, payload: tasks });
-    } catch (error) {
-      dispatch({ type: TASKS_ERROR, payload: error.message });
-    }
-  };
+        dispatch({ type: GET_TASKS_BY_TODO_ID, payload: tasks });
+      } catch (error) {
+        dispatch({ type: TASKS_ERROR, payload: error.message });
+      }
+    },
+    [dispatch]
+  );
 
-  const getTasksByUserId = async (uid) => {
-    try {
-      const tasksSnapshot = await firebase
-        .firestore()
-        .collection('tasks')
-        .orderBy('createdAt', 'asc')
-        .where('userId', '==', uid)
-        .get();
+  const getTasksByUserId = useCallback(
+    async (uid) => {
+      try {
+        const tasksSnapshot = await firebase
+          .firestore()
+          .collection('tasks')
+          .orderBy('createdAt', 'asc')
+          .where('userId', '==', uid)
+          .get();
 
-      const tasks = tasksSnapshot.docs.map((task) => ({
-        ...task.data(),
-        id: task.id,
-      }));
+        const tasks = tasksSnapshot.docs.map((task) => ({
+          ...task.data(),
+          id: task.id,
+        }));
 
-      dispatch({ type: GET_TASKS_BY_USER_ID, payload: tasks });
-    } catch (error) {
-      dispatch({ type: TASKS_ERROR, payload: error.message });
-    }
-  };
+        dispatch({ type: GET_TASKS_BY_USER_ID, payload: tasks });
+      } catch (error) {
+        dispatch({ type: TASKS_ERROR, payload: error.message });
+      }
+    },
+    [dispatch]
+  );
 
   const createTask = async (task) => {
     try {

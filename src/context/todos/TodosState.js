@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import TodosContext from './todosContext';
 import todosReducer from './todosReducer';
 import {
@@ -20,45 +20,51 @@ const TodosState = ({ children }) => {
 
   const [state, dispatch] = useReducer(todosReducer, initialState);
 
-  const getTodosByUserId = async (uid) => {
-    try {
-      const todosSnapshot = await firebase
-        .firestore()
-        .collection('todos')
-        .orderBy('createdAt', 'asc')
-        .where('userId', '==', uid)
-        .get();
+  const getTodosByUserId = useCallback(
+    async (uid) => {
+      try {
+        const todosSnapshot = await firebase
+          .firestore()
+          .collection('todos')
+          .orderBy('createdAt', 'asc')
+          .where('userId', '==', uid)
+          .get();
 
-      const todos = todosSnapshot.docs.map((todo) => ({
-        ...todo.data(),
-        id: todo.id,
-      }));
+        const todos = todosSnapshot.docs.map((todo) => ({
+          ...todo.data(),
+          id: todo.id,
+        }));
 
-      dispatch({ type: GET_TODOS_BY_USER_ID, payload: todos });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: TODOS_ERROR, payload: error.message });
-    }
-  };
+        dispatch({ type: GET_TODOS_BY_USER_ID, payload: todos });
+      } catch (error) {
+        console.log(error);
+        dispatch({ type: TODOS_ERROR, payload: error.message });
+      }
+    },
+    [dispatch]
+  );
 
-  const getTodoById = async (todoId) => {
-    try {
-      const todo = await firebase
-        .firestore()
-        .collection('todos')
-        .doc(todoId)
-        .get();
+  const getTodoById = useCallback(
+    async (todoId) => {
+      try {
+        const todo = await firebase
+          .firestore()
+          .collection('todos')
+          .doc(todoId)
+          .get();
 
-      const myTodo = {
-        ...todo.data(),
-        id: todo.id,
-      };
+        const myTodo = {
+          ...todo.data(),
+          id: todo.id,
+        };
 
-      dispatch({ type: GET_TODO_BY_ID, payload: myTodo });
-    } catch (error) {
-      dispatch({ type: TODOS_ERROR, payload: error.message });
-    }
-  };
+        dispatch({ type: GET_TODO_BY_ID, payload: myTodo });
+      } catch (error) {
+        dispatch({ type: TODOS_ERROR, payload: error.message });
+      }
+    },
+    [dispatch]
+  );
 
   const createTodo = async (todo) => {
     try {

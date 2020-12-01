@@ -29,8 +29,7 @@ function App() {
     } else {
       removeUser();
     }
-    // eslint-disable-next-line
-  }, [user]);
+  }, [user, getUserByUid, removeUser]);
 
   return (
     <Router>

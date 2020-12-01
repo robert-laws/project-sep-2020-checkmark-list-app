@@ -27,8 +27,7 @@ export const Keywords = () => {
     };
 
     getTodos();
-    // eslint-disable-next-line
-  }, [user]);
+  }, [user, getTodosByUserId]);
 
   const handleSearch = (event) => {
     event.preventDefault();

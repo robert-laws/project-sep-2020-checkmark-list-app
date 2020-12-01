@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import UserContext from './userContext';
 import userReducer from './userReducer';
 import { GET_USER_BY_UID, REMOVE_USER, ADD_NEW_USER } from '../types';
@@ -11,21 +11,24 @@ const UserState = ({ children }) => {
 
   const [state, dispatch] = useReducer(userReducer, initialState);
 
-  const getUserByUid = async (uid) => {
-    try {
-      const userDoc = await firebase
-        .firestore()
-        .collection('users')
-        .doc(uid)
-        .get();
+  const getUserByUid = useCallback(
+    async (uid) => {
+      try {
+        const userDoc = await firebase
+          .firestore()
+          .collection('users')
+          .doc(uid)
+          .get();
 
-      const profile = userDoc.data();
+        const profile = userDoc.data();
 
-      dispatch({ type: GET_USER_BY_UID, payload: profile });
-    } catch (error) {
-      console.error('Error getting user profile: ', error);
-    }
-  };
+        dispatch({ type: GET_USER_BY_UID, payload: profile });
+      } catch (error) {
+        console.error('Error getting user profile: ', error);
+      }
+    },
+    [dispatch]
+  );
 
   const addNewUser = async (uid, newUser) => {
     const { firstName, lastName, email } = newUser;
@@ -41,9 +44,9 @@ const UserState = ({ children }) => {
     }
   };
 
-  const removeUser = () => {
+  const removeUser = useCallback(() => {
     dispatch({ type: REMOVE_USER });
-  };
+  }, [dispatch]);
 
   return (
     <UserContext.Provider

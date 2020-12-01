@@ -28,8 +28,7 @@ export const List = () => {
     };
 
     getTodo();
-    // eslint-disable-next-line
-  }, [id]);
+  }, [id, getTodoById]);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -40,8 +39,7 @@ export const List = () => {
     };
 
     getTasks();
-    // eslint-disable-next-line
-  }, [id]);
+  }, [id, getTasksByTodoId]);
 
   return (
     <Page>
